@@ -36,8 +36,11 @@ class FilterProvider extends ChangeNotifier {
       ...meditationExercises,
       ...sleepExercises,
     ];
-    _allData = _filteredData;
+    _filteredData = _allData;
 
     notifyListeners();
   }
+
+  // getter
+  List<dynamic> get filterData => _filteredData;
 }
