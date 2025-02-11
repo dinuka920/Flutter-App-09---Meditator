@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:meditator_app/models/mindfulness_exercise_model.dart';
 
 class MindfullExerciseProvider extends ChangeNotifier {
-  List<MindfulnessExerciseModel> _mindfullExercises = [];
+  List<MindfulnessExerciseModel> _allMindfullExercises = [];
   List<MindfulnessExerciseModel> mindfullExercises = [];
 
   MindfullExerciseProvider() {
-    _mindfullExercises = [
+    _allMindfullExercises = [
       MindfulnessExerciseModel(
         category: "Beginners",
         name: "Mindful Breathing",
@@ -160,6 +160,24 @@ class MindfullExerciseProvider extends ChangeNotifier {
         instructionsUrl: "https://github.com/HGSChandeepa/Meditate",
       ),
     ];
-    mindfullExercises = List.from(_mindfullExercises);
+    mindfullExercises = List.from(_allMindfullExercises);
+  }
+
+  // methode to fetch all the mindfullness exercises
+  List<MindfulnessExerciseModel> getAllMindfullExercisers() {
+    return mindfullExercises;
+  }
+
+  // methode to search by the title
+  void searchMindfullExercise(String query) {
+    if (query.isEmpty) {
+      mindfullExercises = List.from(_allMindfullExercises);
+    } else {
+      mindfullExercises = _allMindfullExercises
+          .where((element) =>
+              element.name.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    }
+    notifyListeners();
   }
 }
