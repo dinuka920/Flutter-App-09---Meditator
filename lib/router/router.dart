@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:go_router/go_router.dart';
+import 'package:meditator_app/models/mindfulness_exercise_model.dart';
 import 'package:meditator_app/pages/main_screen.dart';
+import 'package:meditator_app/pages/mindfull_exercise_details_page.dart';
 import 'package:meditator_app/router/router_names.dart';
 
 class RouterClass {
@@ -11,6 +15,20 @@ class RouterClass {
         name: RouterName.mainPage,
         builder: (context, state) {
           return MainScreen();
+        },
+      ),
+      GoRoute(
+        path: "/mindfullExercise",
+        name: RouterName.mindfullExercise,
+        builder: (context, state) {
+          final mindfulnessExerciseModelJson =
+              state.uri.queryParameters["mindfulExercise"];
+          final mindfulExerciseModel = MindfulnessExerciseModel.fromJson(
+            jsonDecode(mindfulnessExerciseModelJson!),
+          );
+          return MindfullExerciseDetailsPage(
+            mindfullExerciseModel: mindfulExerciseModel,
+          );
         },
       )
     ],

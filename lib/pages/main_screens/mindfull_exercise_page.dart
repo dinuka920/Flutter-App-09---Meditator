@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:meditator_app/models/mindfulness_exercise_model.dart';
 import 'package:meditator_app/providers/mindfull_exercise_provider.dart';
+import 'package:meditator_app/router/router_names.dart';
 import 'package:meditator_app/utils/colors.dart';
 import 'package:meditator_app/utils/text_styles.dart';
 import 'package:provider/provider.dart';
@@ -63,37 +67,48 @@ class MindfullExercisePage extends StatelessWidget {
                       physics: NeverScrollableScrollPhysics(),
                       itemCount: mindFullExercises.mindfullExercises.length,
                       itemBuilder: (context, index) {
-                        MindfulnessExerciseModel singleMindFullEx =
+                        MindfulnessExerciseModel singleMindFullExercise =
                             mindFullExercises.mindfullExercises[index];
-                        return Container(
-                          margin: EdgeInsets.symmetric(vertical: 5),
-                          decoration: BoxDecoration(
-                            color: AppColors.primaryDarkBlue.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: ListTile(
-                            leading: ClipRRect(
-                              borderRadius: BorderRadius.circular(100),
-                              child: Image.asset(
-                                singleMindFullEx.imagePath,
-                                width: MediaQuery.of(context).size.width * 0.13,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.13,
-                                fit: BoxFit.cover,
+                        return GestureDetector(
+                          onTap: () {
+                            GoRouter.of(context).pushNamed(
+                                RouterName.mindfullExercise,
+                                queryParameters: {
+                                  "mindfulExercise": jsonEncode(
+                                      singleMindFullExercise.toJson()),
+                                });
+                          },
+                          child: Container(
+                            margin: EdgeInsets.symmetric(vertical: 5),
+                            decoration: BoxDecoration(
+                              color: AppColors.primaryDarkBlue.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: ListTile(
+                              leading: ClipRRect(
+                                borderRadius: BorderRadius.circular(100),
+                                child: Image.asset(
+                                  singleMindFullExercise.imagePath,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.13,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.13,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-                            ),
-                            title: Text(
-                              singleMindFullEx.name,
-                              style: AppTextStyles.subtitleStyle,
-                            ),
-                            subtitle: Text(
-                              singleMindFullEx.description,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: AppTextStyles.bodyStyle.copyWith(
-                                color:
-                                    AppColors.primaryDarkBlue.withOpacity(0.7),
-                                fontSize: 14,
+                              title: Text(
+                                singleMindFullExercise.name,
+                                style: AppTextStyles.subtitleStyle,
+                              ),
+                              subtitle: Text(
+                                singleMindFullExercise.description,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: AppTextStyles.bodyStyle.copyWith(
+                                  color: AppColors.primaryDarkBlue
+                                      .withOpacity(0.7),
+                                  fontSize: 14,
+                                ),
                               ),
                             ),
                           ),
