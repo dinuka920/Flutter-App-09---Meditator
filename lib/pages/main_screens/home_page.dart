@@ -1,5 +1,4 @@
-// ignore_for_file: deprecated_member_use
-
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
@@ -8,6 +7,7 @@ import 'package:meditator_app/models/meditation_exercise_model.dart';
 import 'package:meditator_app/models/mindfulness_exercise_model.dart';
 import 'package:meditator_app/models/sleep_exercise_model.dart';
 import 'package:meditator_app/providers/filter_provider.dart';
+import 'package:meditator_app/router/router_names.dart';
 import 'package:meditator_app/utils/colors.dart';
 import 'package:meditator_app/utils/text_styles.dart';
 import 'package:provider/provider.dart';
@@ -16,8 +16,14 @@ class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   // handle mindfullness exercises pressed
-  void handleMindfullExercisesPressed() {
-    print("mindfull");
+  void handleMindfullExercisesPressed(
+      BuildContext context, MindfulnessExerciseModel data) {
+    GoRouter.of(context).pushNamed(
+      RouterName.mindfullExerciseTimmer,
+      queryParameters: {
+        "mindfullExerciseTimer": jsonEncode(data.toJson()),
+      },
+    );
   }
 
   // handle mindfullness exercises pressed
@@ -361,7 +367,10 @@ class HomePage extends StatelessWidget {
                                 // todo this
                                 onTap: () {
                                   if (data is MindfulnessExerciseModel) {
-                                    handleMindfullExercisesPressed();
+                                    handleMindfullExercisesPressed(
+                                      context,
+                                      data,
+                                    );
                                   } else if (data is MeditationExerciseModel) {
                                     handlemeditationExercisesPressed(
                                       context,

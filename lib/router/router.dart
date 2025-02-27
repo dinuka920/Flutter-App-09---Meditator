@@ -6,6 +6,7 @@ import 'package:meditator_app/models/mindfulness_exercise_model.dart';
 import 'package:meditator_app/pages/function_page.dart';
 import 'package:meditator_app/pages/main_screen.dart';
 import 'package:meditator_app/pages/mindfull_exercise_details_page.dart';
+import 'package:meditator_app/pages/mindfull_exercise_timer.dart';
 import 'package:meditator_app/router/router_names.dart';
 
 class RouterClass {
@@ -40,6 +41,20 @@ class RouterClass {
           final FunctionDataModel functionDataModel =
               state.extra as FunctionDataModel;
           return FunctionPage(functionDataModel: functionDataModel);
+        },
+      ),
+      GoRoute(
+        path: "/mindfullExerciseTimer",
+        name: RouterName.mindfullExerciseTimmer,
+        builder: (context, state) {
+          final mindfullExerciseModelJson =
+              state.uri.queryParameters["mindfullExerciseTimer"];
+          final mindfulnessExerciseModel = MindfulnessExerciseModel.fromJson(
+            jsonDecode(mindfullExerciseModelJson!),
+          );
+          return MindfullExerciseTimer(
+            mindfulnessExerciseModel: mindfulnessExerciseModel,
+          );
         },
       )
     ],
