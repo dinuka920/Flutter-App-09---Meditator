@@ -16,22 +16,22 @@ class SleepExerciseModel {
   // methode to the convert to Json Data in to a sleepExerciseModel
   factory SleepExerciseModel.fromJson(Map<String, dynamic> json) {
     return SleepExerciseModel(
-      category: json["category"],
-      name: json["name"],
-      description: json["description"],
-      duration: json["duration"],
-      audioUrl: json["audioUrl"],
+      category: json['category'],
+      name: json['name'],
+      description: json['description'],
+      duration: json['duration'], 
+      audioUrl: json['audio_url'],
     );
   }
 
   // convert to the sleepExerciseModel in to a Json data
   Map<String, dynamic> tojson() {
     return {
-      "category": category,
-      "name": name,
-      "description": description,
-      "duration": duration,
-      "audioUrl": duration,
+      'category': category,
+      'name': name,
+      'description': description,
+      'duration': duration,
+      'audio_url': audioUrl,
     };
   }
 }

@@ -19,15 +19,15 @@ class HomePage extends StatelessWidget {
   void handleMindfullExercisesPressed(
       BuildContext context, MindfulnessExerciseModel data) {
     GoRouter.of(context).pushNamed(
-      RouterName.mindfullExerciseTimmer,
+      RouterName.mindfullExerciseTimer,
       queryParameters: {
         "mindfullExerciseTimer": jsonEncode(data.toJson()),
       },
     );
   }
 
-  // handle mindfullness exercises pressed
-  void handlemeditationExercisesPressed(
+  // handle Meditation exercises pressed
+  void handleMeditationExercisesPressed(
     BuildContext context,
     final name,
     final description,
@@ -150,9 +150,15 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  // handle mindfullness exercises pressed
-  void handleSleepExercisesPressed() {
-    print("sleep");
+  // handle sleep exercises pressed
+  void handleSleepExercisesPressed(
+      BuildContext context, SleepExerciseModel data) {
+    GoRouter.of(context).pushNamed(
+      RouterName.sleepExerciseTimer,
+      queryParameters: {
+        "sleepExercise": jsonEncode(data.tojson()),
+      },
+    );
   }
 
   @override
@@ -364,7 +370,6 @@ class HomePage extends StatelessWidget {
                             crossAxisSpacing: 10,
                             children: completedData.map((data) {
                               return GestureDetector(
-                                // todo this
                                 onTap: () {
                                   if (data is MindfulnessExerciseModel) {
                                     handleMindfullExercisesPressed(
@@ -372,7 +377,7 @@ class HomePage extends StatelessWidget {
                                       data,
                                     );
                                   } else if (data is MeditationExerciseModel) {
-                                    handlemeditationExercisesPressed(
+                                    handleMeditationExercisesPressed(
                                       context,
                                       data.name,
                                       data.description,
@@ -381,7 +386,10 @@ class HomePage extends StatelessWidget {
                                       data.videoUrl,
                                     );
                                   } else {
-                                    handleSleepExercisesPressed();
+                                    handleSleepExercisesPressed(
+                                      context,
+                                      data,
+                                    );
                                   }
                                 },
                                 child: Container(
