@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:meditator_app/models/sleep_exercise_model.dart';
 import 'package:meditator_app/utils/colors.dart';
