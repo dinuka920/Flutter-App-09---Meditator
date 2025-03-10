@@ -12,140 +12,142 @@ class MeditationForm extends StatefulWidget {
 class _MeditationFormState extends State<MeditationForm> {
   final _formKey = GlobalKey<FormState>();
 
-  String _catagory = "";
+  String _category = "";
   String _name = "";
   String _description = "";
   int _duration = 0;
   String _audioUrl = "";
   String _videoUrl = "";
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Create a new meditation",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.primaryGreen,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Create a new meditation",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.primaryGreen,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              CustomTextFormFeild(
-                lableText: "Category",
-                keyBoardType: TextInputType.text,
-                hintText: "Category",
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "Please enter a Category";
-                  }
-                  return null;
-                },
-                onSaved: (newValue) {
-                  _catagory = newValue!;
-                },
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              CustomTextFormFeild(
-                lableText: "Name",
-                keyBoardType: TextInputType.text,
-                hintText: "Name",
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "Please enter a Name";
-                  }
-                  return null;
-                },
-                onSaved: (newValue) {
-                  _name = newValue!;
-                },
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              CustomTextFormFeild(
-                lableText: "Description",
-                keyBoardType: TextInputType.text,
-                hintText: "Description",
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "Please enter a Description";
-                  }
-                  return null;
-                },
-                onSaved: (newValue) {
-                  _description = newValue!;
-                },
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              CustomTextFormFeild(
-                lableText: "Duration",
-                keyBoardType: TextInputType.number,
-                hintText: "Duration",
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "Please enter a Duration";
-                  }
-                  return null;
-                },
-                onSaved: (newValue) {
-                  _duration = int.parse(newValue!);
-                },
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              CustomTextFormFeild(
-                lableText: "Audio Url",
-                keyBoardType: TextInputType.text,
-                hintText: "Audio Url",
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "Please enter a Audio Url";
-                  }
-                  return null;
-                },
-                onSaved: (newValue) {
-                  _audioUrl = newValue!;
-                },
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              CustomTextFormFeild(
-                lableText: "Video Url",
-                keyBoardType: TextInputType.text,
-                hintText: "Video Url",
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "Please enter a Video Url";
-                  }
-                  return null;
-                },
-                onSaved: (newValue) {
-                  _videoUrl = newValue!;
-                },
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  ElevatedButton(
+                SizedBox(
+                  height: 30,
+                ),
+                CustomTextFormFeild(
+                  lableText: "Category",
+                  keyBoardType: TextInputType.text,
+                  hintText: "Category",
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Please enter a Category";
+                    }
+                    return null;
+                  },
+                  onSaved: (newValue) {
+                    _category = newValue!;
+                  },
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                CustomTextFormFeild(
+                  lableText: "Name",
+                  keyBoardType: TextInputType.text,
+                  hintText: "Name",
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Please enter a Name";
+                    }
+                    return null;
+                  },
+                  onSaved: (newValue) {
+                    _name = newValue!;
+                  },
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                CustomTextFormFeild(
+                  lableText: "Description",
+                  keyBoardType: TextInputType.text,
+                  hintText: "Description",
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Please enter a Description";
+                    }
+                    return null;
+                  },
+                  onSaved: (newValue) {
+                    _description = newValue!;
+                  },
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                CustomTextFormFeild(
+                  lableText: "Duration",
+                  keyBoardType: TextInputType.number,
+                  hintText: "Duration",
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Please enter a Duration";
+                    }
+                    return null;
+                  },
+                  onSaved: (newValue) {
+                    _duration = int.parse(newValue!);
+                  },
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                CustomTextFormFeild(
+                  lableText: "Audio Url",
+                  keyBoardType: TextInputType.text,
+                  hintText: "Audio Url",
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Please enter a Audio Url";
+                    }
+                    return null;
+                  },
+                  onSaved: (newValue) {
+                    _audioUrl = newValue!;
+                  },
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                CustomTextFormFeild(
+                  lableText: "Video Url",
+                  keyBoardType: TextInputType.text,
+                  hintText: "Video Url",
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Please enter a Video Url";
+                    }
+                    return null;
+                  },
+                  onSaved: (newValue) {
+                    _videoUrl = newValue!;
+                  },
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    ElevatedButton(
                       style: ButtonStyle(
-                        backgroundColor: WidgetStatePropertyAll(
+                        backgroundColor: WidgetStatePropertyAll<Color>(
                           AppColors.primaryGreen,
                         ),
                       ),
@@ -155,15 +157,17 @@ class _MeditationFormState extends State<MeditationForm> {
                         "Submit",
                         style: TextStyle(
                           fontSize: 18,
-                          color: Colors.black38,
+                          color: Colors.black,
                         ),
-                      )),
-                ],
-              )
-            ],
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

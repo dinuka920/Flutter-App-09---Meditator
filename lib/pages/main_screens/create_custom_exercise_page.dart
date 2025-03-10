@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:meditator_app/utils/colors.dart';
 import 'package:meditator_app/widgets/meditation_form.dart';
+import 'package:meditator_app/widgets/mindfulness_form.dart';
+import 'package:meditator_app/widgets/sleep_exercise_form.dart';
 
 class CreateCustomExercisePage extends StatefulWidget {
   const CreateCustomExercisePage({super.key});
@@ -29,7 +31,7 @@ class _CreateCustomExercisePageState extends State<CreateCustomExercisePage> {
           child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: 10,
+            horizontal: 15,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,7 +86,12 @@ class _CreateCustomExercisePageState extends State<CreateCustomExercisePage> {
               SizedBox(
                 height: 30,
               ),
-              MeditationForm(),
+              if(typeOfCategory == "Meditation")
+              MeditationForm()
+              else if(typeOfCategory == "Mindfulness")
+              MindfulExerciseForm()
+              else if(typeOfCategory == "Sleep Exercise")
+              SleepExerciseForm()
             ],
           ),
         ),
