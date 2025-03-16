@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:meditator_app/models/meditation_exercise_model.dart';
+import 'package:meditator_app/providers/custom_data_provider.dart';
 import 'package:meditator_app/utils/colors.dart';
 import 'package:meditator_app/widgets/reuserble/text_input.dart';
+import 'package:provider/provider.dart';
 
 class MeditationForm extends StatefulWidget {
   const MeditationForm({super.key});
@@ -151,8 +154,32 @@ class _MeditationFormState extends State<MeditationForm> {
                           AppColors.primaryGreen,
                         ),
                       ),
-                      // Todo Save data
-                      onPressed: () {},
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          _formKey.currentState!.save();
+
+                          // create a new meditation form the user data
+                          final meditation = MeditationExerciseModel(
+                            category: _category,
+                            name: _name,
+                            description: _description,
+                            duration: _duration,
+                            audioUrl: _audioUrl,
+                            videoUrl: _videoUrl,
+                          );
+                          // clear the fields
+                          _formKey.currentState!.reset();
+                          _category = "";
+                          _name = "";
+                          _description = "";
+                          _duration = 0;
+                          _audioUrl = "";
+                          _videoUrl = "";
+                          Provider.of<CustomDataProvider>(context,
+                                  listen: false)
+                              .addMeditation(meditation, context);
+                        }
+                      },
                       child: Text(
                         "Submit",
                         style: TextStyle(
