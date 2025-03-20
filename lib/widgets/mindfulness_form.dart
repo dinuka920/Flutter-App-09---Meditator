@@ -2,8 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:meditator_app/models/mindfulness_exercise_model.dart';
+import 'package:meditator_app/providers/custom_data_provider.dart';
 import 'package:meditator_app/utils/colors.dart';
 import 'package:meditator_app/widgets/reuserble/text_input.dart';
+import 'package:provider/provider.dart';
 
 class MindfulExerciseForm extends StatefulWidget {
   const MindfulExerciseForm({super.key});
@@ -215,8 +218,37 @@ class _MindfulExerciseFormState extends State<MindfulExerciseForm> {
                           AppColors.primaryGreen,
                         ),
                       ),
-                      // Todo Save data
-                      onPressed: () {},
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          _formKey.currentState!.save();
+
+                          final imagePath = _imagePath?.path ?? "";
+
+                          final mindfullExercise = MindfulnessExerciseModel(
+                            category: _category,
+                            name: _name,
+                            description: _description,
+                            instructions: _instructions,
+                            duration: _duration,
+                            instructionsUrl: _instructionUrl,
+                            imagePath: imagePath,
+                          );
+
+                          _formKey.currentState!.reset();
+                          _category = "";
+                          _name = "";
+                          _description = "";
+                          _instructions = [];
+                          _duration = 0;
+                          _instructionUrl = "";
+                          _imagePath = null;
+
+                          Provider.of<CustomDataProvider>(context,
+                                  listen: false)
+                              .addNewMindfullExercise(
+                                  mindfullExercise, context);
+                        }
+                      },
                       child: Text(
                         "Submit",
                         style: TextStyle(
