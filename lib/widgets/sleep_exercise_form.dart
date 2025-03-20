@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:meditator_app/models/sleep_exercise_model.dart';
+import 'package:meditator_app/providers/custom_data_provider.dart';
 import 'package:meditator_app/utils/colors.dart';
 import 'package:meditator_app/widgets/reuserble/text_input.dart';
+import 'package:provider/provider.dart';
 
 class SleepExerciseForm extends StatefulWidget {
   const SleepExerciseForm({super.key});
@@ -133,8 +136,29 @@ class _SleepExerciseFormState extends State<SleepExerciseForm> {
                           AppColors.primaryGreen,
                         ),
                       ),
-                      // Todo Save data
-                      onPressed: () {},
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          _formKey.currentState!.save();
+                          final sleepExercise = SleepExerciseModel(
+                            category: _catagory,
+                            name: _name,
+                            description: _description,
+                            duration: _duration,
+                            audioUrl: _audioUrl,
+                          );
+
+                          _formKey.currentState!.reset();
+                          _catagory = "";
+                          _name = "";
+                          _description = "";
+                          _duration = 0;
+                          _audioUrl = "";
+
+                          Provider.of<CustomDataProvider>(context,
+                                  listen: false)
+                              .addSleepExercise(sleepExercise, context);
+                        }
+                      },
                       child: Text(
                         "Submit",
                         style: TextStyle(

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:meditator_app/models/meditation_exercise_model.dart';
+import 'package:meditator_app/models/sleep_exercise_model.dart';
 import 'package:meditator_app/services/meditation_service.dart';
+import 'package:meditator_app/services/sleep_exercise_service.dart';
 
 class CustomDataProvider extends ChangeNotifier {
   final List<MeditationExerciseModel> _meditation = [];
-  // getter
+  final List<SleepExerciseModel> _sleepExercises = [];
+  // getters
   List<MeditationExerciseModel> get meditation => _meditation;
+  List<SleepExerciseModel> get sleepExercises => _sleepExercises;
 
   // method to add a new meditation
   void addMeditation(MeditationExerciseModel meditation, BuildContext context) {
@@ -20,6 +24,23 @@ class CustomDataProvider extends ChangeNotifier {
       notifyListeners();
     } catch (error) {
       print("provider error : $error");
+    }
+  }
+
+  // methode to add a new sleep exercise
+  void addSleepExercise(
+      SleepExerciseModel sleepExercise, BuildContext context) {
+    try {
+      _sleepExercises.add(sleepExercise);
+      // sleep exercise add to the local storage
+      try {
+        SleepExerciseService().addSleepExercise(sleepExercise, context);
+      } catch (error) {
+        print("Error provider local storage : $error");
+      }
+      notifyListeners();
+    } catch (error) {
+      print("Error from provider : $error");
     }
   }
 }
