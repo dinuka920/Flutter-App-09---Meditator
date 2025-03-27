@@ -6,6 +6,7 @@ import 'package:meditator_app/models/mindfulness_exercise_model.dart';
 import 'package:meditator_app/models/sleep_exercise_model.dart';
 import 'package:meditator_app/pages/function_page.dart';
 import 'package:meditator_app/pages/main_screen.dart';
+import 'package:meditator_app/pages/main_screens/create_custom_exercise_page.dart';
 import 'package:meditator_app/pages/mindfull_exercise_details_page.dart';
 import 'package:meditator_app/pages/mindfull_exercise_timer.dart';
 import 'package:meditator_app/pages/sleep_Exercise_timer.dart';
@@ -72,6 +73,13 @@ class RouterClass {
           return SleepExerciseTimer(
             sleepExerciseModel: sleepExerciseModel,
           );
+        },
+      ),
+      GoRoute(
+        path: "/create",
+        name: RouterName.create,
+        builder: (context, state) {
+          return CreateCustomExercisePage();
         },
       )
     ],

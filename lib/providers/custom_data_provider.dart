@@ -68,7 +68,7 @@ class CustomDataProvider extends ChangeNotifier {
 
   // -- GET --
   // method to get all the meditation
-  List<MeditationExerciseModel> getMeditatrions() {
+  List<MeditationExerciseModel> getMeditations() {
     try {
       final List<MeditationExerciseModel> allMeditation =
           MeditationService().getMeditation();
@@ -106,7 +106,7 @@ class CustomDataProvider extends ChangeNotifier {
   // -- DELETE --
   // delete meditation exercise
   void deleteMeditation(
-      MeditationExerciseModel meditationExercise, BuildContext context)  {
+      MeditationExerciseModel meditationExercise, BuildContext context) {
     try {
       _meditation.remove(meditationExercise);
       try {
@@ -122,7 +122,7 @@ class CustomDataProvider extends ChangeNotifier {
 
   // delete mindfull exercise
   void deleteMindfullExercise(
-      MindfulnessExerciseModel mindfullExercise, BuildContext context)  {
+      MindfulnessExerciseModel mindfullExercise, BuildContext context) {
     try {
       _mindfullExercises.remove(mindfullExercise);
       try {
